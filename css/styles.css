@@ -16,16 +16,34 @@ p {
 h1, h2 {
     font-family: 'Libre Baskerville', serif;
     margin-bottom: 10px;
+    font-weight: normal;
+}
+
+h2 {
+    margin-top: 28px;
 }
 
 p {
     margin-bottom: 15px;
 }
 
+#menu {
+    
+}
+
+#garlol {
+    text-decoration: none;
+    color: #369;
+    text-shadow: #ccc 1px 0 3px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.6em;
+}
+
 #books_gallery, #misc_gallery {
     max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -10px;
 }
 
 #books_gallery a, #misc_gallery a {

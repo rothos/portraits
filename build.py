@@ -73,6 +73,7 @@ def generate_html():
             <script src="./js/smartquotes.min.js"></script>
         </head>\n"""
     bodyopen = "<body>\n"
+    menu = "<div id='menu'><a id='garlol' href='/'>Ꙩ gar.lol</a></div>\n"
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
@@ -130,7 +131,7 @@ def generate_html():
     -->
 </body></html>"""
 
-    html_content = head + bodyopen + header + top_text \
+    html_content = head + bodyopen + menu + header + top_text \
                  + gallerytag \
                  + books_gallery + misc_gallery \
                  + galleryendtag \
@@ -157,16 +158,34 @@ p {
 h1, h2 {
     font-family: 'Libre Baskerville', serif;
     margin-bottom: 10px;
+    font-weight: normal;
+}
+
+h2 {
+    margin-top: 28px;
 }
 
 p {
     margin-bottom: 15px;
 }
 
+#menu {
+    
+}
+
+#garlol {
+    text-decoration: none;
+    color: #369;
+    text-shadow: #ccc 1px 0 3px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.6em;
+}
+
 #books_gallery, #misc_gallery {
     max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -10px;
 }
 
 #books_gallery a, #misc_gallery a {
