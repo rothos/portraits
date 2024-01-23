@@ -1,0 +1,35 @@
+/*
+styles.css
+*/
+
+/*
+#books_gallery, #misc_gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+*/
+
+#books_gallery, #misc_gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#books_gallery a, #misc_gallery a, #books_gallery span {
+  /* height: 40vh; */
+  # height: 300px;
+  flex-grow: 1;
+  padding: 0;
+  margin: 10px;
+}
+
+#books_gallery span:last-child, #misc_gallery span:last-child {
+  flex-grow: 12;
+}
+
+#books_gallery a img, #misc_gallery a img {
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}

@@ -3,10 +3,10 @@ Build the static site which deploys to gar.lol/portraits via Github Pages.
 """
 
 import os
-from bs4 import BeautifulSoup as bs # for prettifying HTML
-from bs4 import formatter as bs_formatter # for prettifying HTML
-from natsort import natsorted
-from PIL import Image  # Import PIL to get image dimensions
+from bs4 import BeautifulSoup as bs         # for prettifying HTML
+from bs4 import formatter as bs_formatter   # also for prettifying
+from natsort import natsorted               # to sort filenames
+from PIL import Image                       # to get image dimensions
 
 # Total image count
 total_images = 0
@@ -45,7 +45,7 @@ def generate_gallery(header, folder_name, gallery_id):
         gallery_html += f'        <img alt="portrait #{total_images}, a portrait drawing of me" src="{thumbnail_path}"/>\n'
         gallery_html += '    </a>\n'
 
-    gallery_html += '</div>\n'
+    gallery_html += '<span></span></div>\n'
     return gallery_html
 
 # Function to generate the entire HTML content
@@ -60,6 +60,7 @@ def generate_html():
     head = """<!DOCTYPE html><html><head>
             <title>Portraits</title>
             <link rel="stylesheet" href="./css/photoswipe.css">
+            <link rel="stylesheet" href="./css/styles.css">
         </head>\n"""
     bodyopen = "<body>\n"
     header = '<h1>Portraits</h1>\n'
@@ -74,7 +75,9 @@ def generate_html():
     definitely include them on this page. (I have omitted a total of two
     portraits from this page ({n_ignored}/{total_images+n_ignored}, or
     {"%1.1f" % (100*n_ignored/(total_images+n_ignored))}%), for different
-    reasons. Only in very special cases do I not include a portrait.)
+    reasons. Only in very special cases do I not include a portrait.) Some
+    people have drawn multiple portraits (for example, the very first two
+    portraits in this gallery were drawn by the same person).
     </p>
     <p>
     For details about how I processed the images and created this gallery,
@@ -93,6 +96,10 @@ def generate_html():
         });
         lightbox.init();
     </script>
+    <!--
+    References:
+        https://css-tricks.com/adaptive-photo-layout-with-flexbox/
+    -->
 </body></html>"""
 
     html_content = head + bodyopen + header + top_text \
@@ -104,7 +111,42 @@ def generate_html():
 
 # Function to generate CSS styling
 def generate_css():
-    css_content = '/* Add your CSS styling here */\n'
+    css_content = """/*
+styles.css
+*/
+
+/*
+#books_gallery, #misc_gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+*/
+
+#books_gallery, #misc_gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#books_gallery a, #misc_gallery a, #books_gallery span {
+  /* height: 40vh; */
+  # height: 300px;
+  flex-grow: 1;
+  padding: 0;
+  margin: 10px;
+}
+
+#books_gallery span:last-child, #misc_gallery span:last-child {
+  flex-grow: 12;
+}
+
+#books_gallery a img, #misc_gallery a img {
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+"""
     return css_content
 
 # Main function to generate HTML, CSS, and write to files
@@ -119,8 +161,8 @@ def main():
     with open("index.html", "w") as html_file:
         html_file.write(prettyHTML)
 
-    # with open("css/styles.css", "w") as css_file:
-    #     css_file.write(css_content)
+    with open("css/styles.css", "w") as css_file:
+        css_file.write(css_content)
 
 if __name__ == "__main__":
     main()
