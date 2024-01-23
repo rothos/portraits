@@ -80,9 +80,9 @@ def generate_html():
     2017 and 2018 were very active; meanwhile, I collected only two portraits
     in 2020 and zero in 2021. The portraits are listed in roughly
     chronological order, except for a set of drawings at the end, which were
-    not scanned from my portrait sketchbooks &emdash; they're a miscellaneous
-    assortment of drawings that I got from friends and strangers, solicited or
-    not, over the years.
+    not scanned from my portrait sketchbooks — they're a miscellaneous
+    collection of drawings that I received from friends and strangers,
+    solicited or not, over the years.
     </p>
     <p>
     I welcome any portraits you want to send me, and I will almost
