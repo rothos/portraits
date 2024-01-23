@@ -59,6 +59,8 @@ def generate_html():
 
     head = """<!DOCTYPE html><html><head>
             <title>Portraits</title>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width,initial-scale=1"/>
             <link rel="stylesheet" href="./css/photoswipe.css">
             <link rel="stylesheet" href="./css/styles.css">
             <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap" rel="stylesheet">
