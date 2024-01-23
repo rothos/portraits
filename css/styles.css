@@ -33,6 +33,13 @@ p {
 }
 
 @media only screen and (max-width: 600px) {
+    body {
+      padding: 18px;
+    }
+    #books_gallery a, #misc_gallery a, #books_gallery span {
+      margin: 4px;
+    }
+
     #books_gallery a img, #misc_gallery a img, #books_gallery span {
       height: 150px;
     }
