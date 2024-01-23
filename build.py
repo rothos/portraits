@@ -7,6 +7,17 @@ from bs4 import BeautifulSoup as bs         # for prettifying HTML
 from bs4 import formatter as bs_formatter   # also for prettifying
 from natsort import natsorted               # to sort filenames
 from PIL import Image                       # to get image dimensions
+from datetime import datetime               # to print the date in human-readable format
+import time                                 # to get epoch time
+
+# Get current date and time info (printed in a comment at the end of the page)
+current_local_time = datetime.now()
+local_timezone_name = current_local_time.astimezone().tzname()
+formatted_time = current_local_time.strftime("%Y-%m-%d %H:%M:%S %Z") \
+               + f"({local_timezone_name})"
+
+# For ensuring files aren't cached.
+epoch = int(time.time())
 
 # Total image count
 total_images = 0
@@ -42,7 +53,10 @@ def generate_gallery(header, folder_name, gallery_id):
         width, height = get_image_dimensions(image_path)
         twidth, theight = get_image_dimensions(thumbnail_path)
 
-        gallery_html += f'    <a href="{image_path}" data-pswp-width="{width}" data-pswp-height="{height}" target="_blank">\n'
+        gallery_html += f'    <a href="{image_path}" \
+                                        data-pswp-width="{width}" \
+                                        data-pswp-height="{height}" \
+                                        target="_blank">\n'
         gallery_html += f'        <img alt="portrait #{total_images}, a portrait drawing of me" \
                                         src="{thumbnail_path}" \
                                         width="{twidth}" \
@@ -62,14 +76,16 @@ def generate_html():
     books_gallery = generate_gallery("Sketchbook portraits", "books", "books_gallery")
     misc_gallery = generate_gallery("Miscellaneous portraits", "misc", "misc_gallery")
 
-    head = """<!DOCTYPE html><html><head>
+    head = f"""<!DOCTYPE html><html><head>
             <title>Portraits</title>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width,initial-scale=1"/>
             <link rel="stylesheet" href="./css/photoswipe.css">
-            <link rel="stylesheet" href="./css/styles.css">
-            <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="./css/styles.css?{epoch}">
+            <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap" \
+                rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap" \
+                rel="stylesheet">
             <script src="./js/smartquotes.min.js"></script>
         </head>\n"""
     bodyopen = "<body>\n"
@@ -126,10 +142,9 @@ def generate_html():
         });
     </script>
     <!--
-    References:
-        https://css-tricks.com/adaptive-photo-layout-with-flexbox/
+    Last updated: %s
     -->
-</body></html>"""
+</body></html>""" % formatted_time
 
     html_content = head + bodyopen + menu + header + top_text \
                  + gallerytag \
