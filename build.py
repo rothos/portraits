@@ -40,9 +40,14 @@ def generate_gallery(header, folder_name, gallery_id):
         
         # Get image dimensions
         width, height = get_image_dimensions(image_path)
+        twidth, theight = get_image_dimensions(thumbnail_path)
 
         gallery_html += f'    <a href="{image_path}" data-pswp-width="{width}" data-pswp-height="{height}" target="_blank">\n'
-        gallery_html += f'        <img alt="portrait #{total_images}, a portrait drawing of me" src="{thumbnail_path}"/>\n'
+        gallery_html += f'        <img alt="portrait #{total_images}, a portrait drawing of me" \
+                                        src="{thumbnail_path}" \
+                                        width="{twidth}" \
+                                        height="{theight}" \
+                                        />\n'
         gallery_html += '    </a>\n'
 
     gallery_html += '<span></span></div>\n'
@@ -166,6 +171,10 @@ p {
 
 #books_gallery a, #misc_gallery a, #books_gallery span {
   margin: 10px;
+}
+
+#books_gallery a img, #misc_gallery a img, #books_gallery span {
+  background-color: #ddd;
 }
 
 @media only screen and (max-width: 600px) {
