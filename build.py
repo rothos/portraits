@@ -78,7 +78,11 @@ def generate_html():
     <p>
     The first portraits on this page were drawn in Spring of 2017. The years
     2017 and 2018 were very active; meanwhile, I collected only two portraits
-    in 2020 and zero in 2021.
+    in 2020 and zero in 2021. The portraits are listed in roughly
+    chronological order, except for a set of drawings at the end, which were
+    not scanned from my portrait sketchbooks &emdash; they're a miscellaneous
+    assortment of drawings that I got from friends and strangers, solicited or
+    not, over the years.
     </p>
     <p>
     I welcome any portraits you want to send me, and I will almost
