@@ -27,9 +27,7 @@ p {
     margin-bottom: 15px;
 }
 
-#menu {
-    
-}
+#menu {}
 
 #garlol {
     text-decoration: none;
@@ -37,6 +35,10 @@ p {
     text-shadow: #ccc 1px 0 3px;
     font-family: 'Libre Baskerville', serif;
     font-size: 1.6em;
+}
+
+#gallery {
+    margin-bottom: 3em;
 }
 
 #books_gallery, #misc_gallery {

@@ -93,18 +93,23 @@ def generate_html():
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
-    draw me. This project occasionally undergoes long periods of stagnation,
+    draw me. I like to know how people perceive me, and how they express that
+    perception. I see a lot of myself, and a lot of the artists, in the
+    drawings below. It's not always clear which is which.
+    </p>
+    <p>
+    This project occasionally undergoes long periods of stagnation,
     but it's never dead, or complete. Currently, I have a total of
     {total_images} portraits collected on this page.
     </p>
     <p>
-    The first portraits on this page were drawn in Spring of 2017. The years
-    2017 and 2018 were very active; meanwhile, I collected only two portraits
-    in 2020 and zero in 2021. The portraits are listed in roughly
-    chronological order, except for a set of drawings at the end, which were
-    not scanned from my portrait sketchbooks — they're a miscellaneous
-    collection of drawings that I received from friends and strangers,
-    solicited or not, over the years.
+    The earliest portrait on this page dates to 2015. I didn't get sketchbooks
+    and make it a project until Spring of 2017. The years 2017 and 2018 were
+    very active; meanwhile, I collected only two portraits in 2020 and zero in
+    2021. The portraits are listed in roughly chronological order, except for
+    a set of drawings at the end, which were not scanned from my portrait
+    sketchbooks — they're a miscellaneous collection of drawings that I
+    received from friends and strangers, solicited or not, over the years.
     </p>
     <p>
     I welcome any portraits you want to send me, and I will almost
@@ -115,16 +120,23 @@ def generate_html():
     people have drawn multiple portraits (for example, the very first two
     portraits in this gallery were drawn by the same person).
     </p>
+    <!--
     <p>
     For details about how I processed the images and created this gallery,
     see the very bottom of the page.
     </p>
+    -->
     <p>
     Click on any portrait to see it in higher resolution.
     </p>\n"""
     gallerytag = '<div id="gallery">\n'
     galleryendtag = '</div>\n'
-    bottom_text = '<h2>Notes on the making of this gallery</h2><p>[notes to be added]</p>\n'
+    bottom_text = """\
+    <!--
+    <h2>Notes on the making of this gallery</h2>\
+    <p>[notes to be added]</p>\
+    -->\
+    """
     bodyclose = """
     <script type="module">
         import PhotoSwipeLightbox from './js/photoswipe-lightbox.esm.min.js';
@@ -184,9 +196,7 @@ p {
     margin-bottom: 15px;
 }
 
-#menu {
-    
-}
+#menu {}
 
 #garlol {
     text-decoration: none;
@@ -194,6 +204,10 @@ p {
     text-shadow: #ccc 1px 0 3px;
     font-family: 'Libre Baskerville', serif;
     font-size: 1.6em;
+}
+
+#gallery {
+    margin-bottom: 3em;
 }
 
 #books_gallery, #misc_gallery {
