@@ -67,5 +67,11 @@ for book_folder in book1@800dpi book2@800dpi book3@800dpi; do
     done
 done
 
+echo "Generating thumbnails..."
+
+# Create thumbnail images.
+generate_misc_thumbnails="generate_thumbnails.sh"
+bash "$generate_thumbnails" "$output_folder"
+
 unset IFS
 print_elapsed_time

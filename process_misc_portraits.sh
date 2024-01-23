@@ -74,5 +74,11 @@ for image_path in $(ls "$input_folder"/* | sort -V); do
     fi
 done
 
+echo "Generating thumbnails..."
+
+# Create thumbnail images.
+generate_misc_thumbnails="generate_thumbnails.sh"
+bash "$generate_thumbnails" "$output_folder"
+
 unset IFS
 print_elapsed_time
