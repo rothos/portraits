@@ -13,6 +13,12 @@ p {
     max-width: 800px;
 }
 
+a {
+    color: #259;
+    text-decoration: none;
+    background-color: #edf6fb;
+}
+
 h1, h2 {
     font-family: 'Libre Baskerville', serif;
     margin-bottom: 10px;
@@ -30,6 +36,7 @@ p {
 #menu {}
 
 #garlol {
+    background-color: unset;
     text-decoration: none;
     color: #369;
     text-shadow: #ccc 1px 0 3px;

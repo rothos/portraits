@@ -3,8 +3,7 @@ Build the static site which deploys to gar.lol/portraits via Github Pages.
 """
 
 import os
-from bs4 import BeautifulSoup as bs         # for prettifying HTML
-from bs4 import formatter as bs_formatter   # also for prettifying
+import minify_html
 from natsort import natsorted               # to sort filenames
 from PIL import Image                       # to get image dimensions
 from datetime import datetime               # to print the date in human-readable format
@@ -54,6 +53,7 @@ def generate_gallery(header, folder_name, gallery_id):
         twidth, theight = get_image_dimensions(thumbnail_path)
 
         gallery_html += f'    <a href="{image_path}" \
+                                        name="p{total_images}" \
                                         data-pswp-width="{width}" \
                                         data-pswp-height="{height}" \
                                         target="_blank">\n'
@@ -103,9 +103,10 @@ def generate_html():
     {total_images} portraits collected on this page.
     </p>
     <p>
-    The earliest portrait on this page dates to 2015. I didn't get sketchbooks
-    and make it a project until Spring of 2017. The years 2017 and 2018 were
-    very active; meanwhile, I collected only two portraits in 2020 and zero in
+    The <a href="javascript:void(0)" data-pswp-open="144">earliest
+    portrait</a> on this page dates to 2015. I didn't get sketchbooks and make
+    it a project until Spring of 2017. The years 2017 and 2018 were very
+    active; meanwhile, I collected only two portraits in 2020 and zero in
     2021. The portraits are listed in roughly chronological order, except for
     a set of drawings at the end, which were not scanned from my portrait
     sketchbooks — they're a miscellaneous collection of drawings that I
@@ -146,8 +147,33 @@ def generate_html():
             pswpModule: () => import('./js/photoswipe.esm.min.js')
         });
         lightbox.init();
+
+        if(window.location.hash) {
+            // Fragment exists
+            var hash = window.location.hash.slice(1)
+            var pattern = /^p(\\d+)$/;
+            var match = hash.match(pattern);
+            if (match) {
+                var pN = parseInt(match[1], 10);
+                lightbox.loadAndOpen(pN-1, {
+                    gallery: document.querySelector('#gallery')
+                });
+            }
+        }
+
+        var elementsWithAttribute = document.querySelectorAll('[data-pswp-open]');
+        elementsWithAttribute.forEach(function(element) {
+            element.addEventListener('click', function() {
+                var id = element.getAttribute('data-pswp-open');
+                window.location.hash = "#p" + str(id);
+                lightbox.loadAndOpen(id-1, {
+                    gallery: document.querySelector('#gallery')
+                })
+            });
+        });
+
     </script>
-    <script>
+    <script type="module">
         // Enable smart quotes
         document.addEventListener('DOMContentLoaded', function() {
             smartquotes();
@@ -182,6 +208,12 @@ p {
     max-width: 800px;
 }
 
+a {
+    color: #259;
+    text-decoration: none;
+    background-color: #edf6fb;
+}
+
 h1, h2 {
     font-family: 'Libre Baskerville', serif;
     margin-bottom: 10px;
@@ -199,6 +231,7 @@ p {
 #menu {}
 
 #garlol {
+    background-color: unset;
     text-decoration: none;
     color: #369;
     text-shadow: #ccc 1px 0 3px;
@@ -260,12 +293,10 @@ def main():
     html_content = generate_html()
     css_content = generate_css()
 
-    soup = bs(html_content, features="html.parser")
-    formatter = bs_formatter.HTMLFormatter(indent=2)
-    prettyHTML = soup.prettify(formatter=formatter)
+    minified = minify_html.minify(html_content, minify_js=True)
 
     with open("index.html", "w") as html_file:
-        html_file.write(prettyHTML)
+        html_file.write(minified)
 
     with open("css/styles.css", "w") as css_file:
         css_file.write(css_content)
