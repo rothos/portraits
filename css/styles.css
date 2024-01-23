@@ -32,6 +32,13 @@ p {
   margin: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+    #books_gallery a img, #misc_gallery a img, #books_gallery span {
+      height: 150px;
+    }
+}
+
+
 /*
 #books_gallery, #misc_gallery {
   display: flex;
