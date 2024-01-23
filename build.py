@@ -128,7 +128,8 @@ def generate_html():
     </p>
     -->
     <p>
-    Click on any portrait to see it in higher resolution.
+    Click on any portrait to see it in higher resolution. You can link to
+    any specific portrait by copying the URL after clicking on the image.
     </p>\n"""
     gallerytag = '<div id="gallery">\n'
     galleryendtag = '</div>\n'
@@ -150,7 +151,7 @@ def generate_html():
 
         if(window.location.hash) {
             // Fragment exists
-            var hash = window.location.hash.slice(1)
+            var hash = window.location.hash.slice(1);
             var pattern = /^p(\\d+)$/;
             var match = hash.match(pattern);
             if (match) {
@@ -161,17 +162,45 @@ def generate_html():
             }
         }
 
+        // Code taken from here: https://stackoverflow.com/a/5298684
+        function removeHash () { 
+            var scrollV, scrollH, loc = window.location;
+            if ("replaceState" in history)
+                history.replaceState("", document.title, loc.pathname + loc.search);
+            else {
+                // Prevent scrolling by storing the page's current scroll offset
+                scrollV = document.body.scrollTop;
+                scrollH = document.body.scrollLeft;
+
+                loc.hash = "";
+
+                // Restore the scroll offset, should be flicker free
+                document.body.scrollTop = scrollV;
+                document.body.scrollLeft = scrollH;
+            }
+        }
+
         var elementsWithAttribute = document.querySelectorAll('[data-pswp-open]');
         elementsWithAttribute.forEach(function(element) {
             element.addEventListener('click', function() {
                 var id = element.getAttribute('data-pswp-open');
-                window.location.hash = "#p" + str(id);
                 lightbox.loadAndOpen(id-1, {
                     gallery: document.querySelector('#gallery')
-                })
+                });
             });
         });
 
+        lightbox.on('change', (e) => {
+            // triggers when slide is switched, and at initialization
+            var newHash = "#p" + (lightbox.pswp.currIndex+1);
+            var curUrlNoHash = window.location.toString().split('#')[0];
+            history.replaceState({}, '', curUrlNoHash + newHash);
+        });
+
+        lightbox.on('close', () => {
+            // PhotoSwipe starts to close, unbind most events here
+            removeHash();
+        });
     </script>
     <script type="module">
         // Enable smart quotes
