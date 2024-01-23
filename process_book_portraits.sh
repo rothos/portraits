@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create the output folder if it doesn't exist
-output_folder="edited_books"
+output_folder="books"
 mkdir -p "$output_folder"
 
 log_file="process_book_portraits.log"

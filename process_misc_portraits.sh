@@ -4,7 +4,7 @@
 input_folder="misc_portraits_raw/2_edited"
 
 # Create the output folder if it doesn't exist
-output_folder="edited_misc"
+output_folder="misc"
 mkdir -p "$output_folder"
 
 log_file="process_misc_portraits.log"
