@@ -221,6 +221,7 @@ p {
 
     #books_gallery a img, #misc_gallery a img {
       height: 150px;
+      width: auto;
     }
 }
 """
