@@ -54,6 +54,20 @@ p {
   background-color: #ddd;
 }
 
+@media only screen and (max-width: 800px) {
+    body {
+      padding: 24px;
+    }
+    #books_gallery a, #misc_gallery a {
+      margin: 6px;
+    }
+
+    #books_gallery a img, #misc_gallery a img {
+      height: 190px;
+      width: auto;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     body {
       padding: 18px;
