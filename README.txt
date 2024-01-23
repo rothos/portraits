@@ -34,11 +34,14 @@ REDUCING IMAGE SIZE BY LOWERING BIT DEPTH
 -----------------------------------------
 
 Colorspaces include: HCL HCLp HSI HSB HSL
+
 DON'T use HSL for testing average saturation on nearly-grayscale images.
+It will give spurious results.
+
 See: https://legacy.imagemagick.org/discourse-server/viewtopic.php?t=29781
      https://archive.is/XRNHt
 
-Test images:
+Some test images and their mean saturations:
 
     convert "book1@800dpi/p 0.png" -resize '1600x1600>' -colors 255 +dither -auto-orient books_edited/tests/testA.png
     convert "book1@800dpi/p 23.png" -resize '1600x1600>' -colors 255 +dither -auto-orient books_edited/tests/testB.png
