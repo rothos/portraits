@@ -44,6 +44,10 @@ p {
     font-size: 1.6em;
 }
 
+#garlol span {
+    font-family: "Droid Sans", sans-serif;
+}
+
 #gallery {
     margin-bottom: 3em;
 }

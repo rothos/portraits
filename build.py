@@ -82,6 +82,7 @@ def generate_html():
             <meta name="viewport" content="width=device-width,initial-scale=1"/>
             <link rel="stylesheet" href="./css/photoswipe.css">
             <link rel="stylesheet" href="./css/styles.css?{epoch}">
+            <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet'>
             <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap" \
                 rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap" \
@@ -89,7 +90,7 @@ def generate_html():
             <script src="./js/smartquotes.min.js"></script>
         </head>\n"""
     bodyopen = "<body>\n"
-    menu = "<div id='menu'><a id='garlol' href='/'>&#42600; gar.lol</a></div>\n"
+    menu = "<div id='menu'><a id='garlol' href='/'><span>&#42600;</span> gar.lol</a></div>\n"
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
@@ -266,6 +267,10 @@ p {
     text-shadow: #ccc 1px 0 3px;
     font-family: 'Libre Baskerville', serif;
     font-size: 1.6em;
+}
+
+#garlol span {
+    font-family: "Droid Sans", sans-serif;
 }
 
 #gallery {
