@@ -50,7 +50,7 @@ def generate_gallery(header, folder_name, gallery_id):
                                         />\n'
         gallery_html += '    </a>\n'
 
-    gallery_html += '<span></span></div>\n'
+    gallery_html += '</div>\n'
     return gallery_html
 
 # Function to generate the entire HTML content
@@ -169,11 +169,11 @@ p {
     flex-wrap: wrap;
 }
 
-#books_gallery a, #misc_gallery a, #books_gallery span {
+#books_gallery a, #misc_gallery a {
   margin: 10px;
 }
 
-#books_gallery a img, #misc_gallery a img, #books_gallery span {
+#books_gallery a img, #misc_gallery a img {
   background-color: #ddd;
 }
 
@@ -181,39 +181,14 @@ p {
     body {
       padding: 18px;
     }
-    #books_gallery a, #misc_gallery a, #books_gallery span {
+    #books_gallery a, #misc_gallery a {
       margin: 4px;
     }
 
-    #books_gallery a img, #misc_gallery a img, #books_gallery span {
+    #books_gallery a img, #misc_gallery a img {
       height: 150px;
     }
 }
-
-
-/*
-#books_gallery, #misc_gallery {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#books_gallery a, #misc_gallery a, #books_gallery span {
-  height: 300px;
-  flex-grow: 1;
-  margin: 10px;
-}
-
-#books_gallery span:last-child, #misc_gallery span:last-child {
-  flex-grow: 12;
-}
-
-#books_gallery a img, #misc_gallery a img {
-  max-height: 100%;
-  min-width: 100%;
-  object-fit: cover;
-  vertical-align: middle;
-}
-*/
 """
     return css_content
 
