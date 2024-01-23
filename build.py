@@ -49,8 +49,8 @@ def generate_html():
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
         As an ongoing art project, I sometimes ask people to draw me. This
-        project has undergone long periods of stagnation, but at present it's
-        still going. Currently, I have a total of {total_images} portraits
+        project has undergone long periods of stagnation, but I haven't ever
+        given up on it. Currently, I have a total of {total_images} portraits
         collected on this page.
         </p>
         <p>
