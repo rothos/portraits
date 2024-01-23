@@ -6,6 +6,10 @@
     </title>
     <link href="./css/photoswipe.css" rel="stylesheet"/>
     <link href="./css/styles.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap" rel="stylesheet"/>
+    <script src="./js/smartquotes.min.js">
+    </script>
   </head>
   <body>
     <h1>
@@ -13,9 +17,14 @@
     </h1>
     <p>
       As an ongoing art project, I sometimes ask people if they'd like to to
-    draw me. This project has undergone long periods of stagnation, but I
-    haven't ever given up on it. Currently, I have a total of 150
-    portraits collected on this page.
+    draw me. This project occasionally undergoes long periods of stagnation,
+    but it's never dead, or complete. Currently, I have a total of
+    150 portraits collected on this page.
+    </p>
+    <p>
+      The first portraits on this page were drawn in Spring of 2017. The years
+    2017 and 2018 were very active; meanwhile, I collected only two portraits
+    in 2020 and zero in 2021.
     </p>
     <p>
       I welcome any portraits you want to send me, and I will almost
@@ -29,6 +38,9 @@
     <p>
       For details about how I processed the images and created this gallery,
     see the very bottom of the page.
+    </p>
+    <p>
+      Click on any portrait to see it in higher resolution.
     </p>
     <div id="gallery">
       <h2>
@@ -496,8 +508,11 @@
         </span>
       </div>
     </div>
+    <h2>
+      Notes on the making of this gallery
+    </h2>
     <p>
-      [details]
+      [notes to be added]
     </p>
     <script type="module">
       import PhotoSwipeLightbox from './js/photoswipe-lightbox.esm.min.js';
@@ -507,6 +522,12 @@
             pswpModule: () => import('./js/photoswipe.esm.min.js')
         });
         lightbox.init();
+    </script>
+    <script>
+      // Enable smart quotes
+        document.addEventListener('DOMContentLoaded', function() {
+            smartquotes();
+        });
     </script>
     <!--
     References:

@@ -61,14 +61,22 @@ def generate_html():
             <title>Portraits</title>
             <link rel="stylesheet" href="./css/photoswipe.css">
             <link rel="stylesheet" href="./css/styles.css">
+            <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap" rel="stylesheet">
+            <script src="./js/smartquotes.min.js"></script>
         </head>\n"""
     bodyopen = "<body>\n"
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
-    draw me. This project has undergone long periods of stagnation, but I
-    haven't ever given up on it. Currently, I have a total of {total_images}
-    portraits collected on this page.
+    draw me. This project occasionally undergoes long periods of stagnation,
+    but it's never dead, or complete. Currently, I have a total of
+    {total_images} portraits collected on this page.
+    </p>
+    <p>
+    The first portraits on this page were drawn in Spring of 2017. The years
+    2017 and 2018 were very active; meanwhile, I collected only two portraits
+    in 2020 and zero in 2021.
     </p>
     <p>
     I welcome any portraits you want to send me, and I will almost
@@ -82,10 +90,13 @@ def generate_html():
     <p>
     For details about how I processed the images and created this gallery,
     see the very bottom of the page.
+    </p>
+    <p>
+    Click on any portrait to see it in higher resolution.
     </p>\n"""
     gallerytag = '<div id="gallery">\n'
     galleryendtag = '</div>\n'
-    bottom_text = '<p>[details]</p>\n'
+    bottom_text = '<h2>Notes on the making of this gallery</h2><p>[notes to be added]</p>\n'
     bodyclose = """
     <script type="module">
         import PhotoSwipeLightbox from './js/photoswipe-lightbox.esm.min.js';
@@ -95,6 +106,12 @@ def generate_html():
             pswpModule: () => import('./js/photoswipe.esm.min.js')
         });
         lightbox.init();
+    </script>
+    <script>
+        // Enable smart quotes
+        document.addEventListener('DOMContentLoaded', function() {
+            smartquotes();
+        });
     </script>
     <!--
     References:
@@ -115,24 +132,45 @@ def generate_css():
 styles.css
 */
 
-/*
+body {
+    font-family: 'Assistant', sans-serif;
+    padding: 40px;
+    margin: 0;
+    color: #222;
+}
+
+p {
+    max-width: 800px;
+}
+
+h1, h2 {
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
 #books_gallery, #misc_gallery {
+    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
-*/
 
+#books_gallery a, #misc_gallery a, #books_gallery span {
+  margin: 10px;
+}
+
+/*
 #books_gallery, #misc_gallery {
   display: flex;
   flex-wrap: wrap;
 }
 
 #books_gallery a, #misc_gallery a, #books_gallery span {
-  /* height: 40vh; */
-  # height: 300px;
+  height: 300px;
   flex-grow: 1;
-  padding: 0;
   margin: 10px;
 }
 
@@ -146,6 +184,7 @@ styles.css
   object-fit: cover;
   vertical-align: middle;
 }
+*/
 """
     return css_content
 
