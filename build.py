@@ -325,7 +325,7 @@ def main():
     minified = minify_html.minify(html_content, minify_js=True)
 
     with open("index.html", "w") as html_file:
-        html_file.write(minified)
+        html_file.write(html_content)
 
     with open("css/styles.css", "w") as css_file:
         css_file.write(css_content)
