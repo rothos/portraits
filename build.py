@@ -247,7 +247,7 @@ p {
     max-width: 600px;
 }
 
-a {
+p a {
     color: #259;
     text-decoration: none;
     background-color: #edf6fb;
