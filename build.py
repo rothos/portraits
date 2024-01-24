@@ -90,7 +90,7 @@ def generate_html():
             <script src="./js/smartquotes.min.js"></script>
         </head>\n"""
     bodyopen = "<body>\n"
-    menu = "<div id='menu'><a id='garlol' href='/'>:: gar.lol</a></div>\n"
+    menu = "<div id='menu'><a id='garlol' href='/'>// gar.lol</a></div>\n"
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
@@ -115,12 +115,14 @@ def generate_html():
     drawings that I received from friends and strangers over the years (all
     unsolicited, iirc).
     </p>
+    <!--
     <p>
     I include almost all portraits on this page. I have omitted only two
     portraits ({n_ignored}/{total_images+n_ignored}, or
     {"%1.1f" % (100*n_ignored/(total_images+n_ignored))}%), each for different
     reasons. Only in very special cases do I not include a portrait here.
     </p>
+    -->
     <p>
     Some people have drawn multiple portraits. For example, the very first two
     portraits in this gallery were drawn by the same person.
@@ -136,7 +138,7 @@ def generate_html():
     </p>
     -->
     <p>
-    Click on any portrait to see it in higher resolution. You can link to
+    Click on any image to see it in higher resolution. You can link to
     any specific portrait by copying the URL after clicking on the image.
     </p>\n"""
     gallerytag = '<div id="gallery">\n'
