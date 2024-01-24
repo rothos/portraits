@@ -111,19 +111,20 @@ def generate_html():
     2021. The portraits are listed in roughly chronological order, except for
     a set of drawings at the end, which were not scanned from my portrait
     sketchbooks — they're a miscellaneous collection of drawings that I
-    received from friends and strangers, solicited or not, over the years
-    (all unsolicited, I think, <a href="javascript:void(0)"
-    data-pswp-open="140">except for one</a>).
+    received from friends and strangers over the years (all unsolicited, iirc,
+    <a href="javascript:void(0)" data-pswp-open="140">except for one</a>).
     </p>
     <p>
     I always welcome new portraits. If you want to draw me, I ask that you
     first try to find me in person and draw in my portrait book.
     </p>
     <p>
-    I include almost all portraits on this page. (I have omitted a total of
-    two portraits from this page ({n_ignored}/{total_images+n_ignored}, or
-    {"%1.1f" % (100*n_ignored/(total_images+n_ignored))}%), for different
-    reasons. Only in very special cases do I not include a portrait here.)
+    I include almost all portraits on this page. I have omitted only two
+    portraits ({n_ignored}/{total_images+n_ignored}, or
+    {"%1.1f" % (100*n_ignored/(total_images+n_ignored))}%), each for different
+    reasons. Only in very special cases do I not include a portrait here.
+    </p>
+    <p>
     Some people have drawn multiple portraits. For example, the very first two
     portraits in this gallery were drawn by the same person.
     </p>
@@ -240,7 +241,7 @@ body {
 }
 
 p {
-    max-width: 800px;
+    max-width: 600px;
 }
 
 a {
