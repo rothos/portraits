@@ -34,7 +34,7 @@ def generate_gallery(header, folder_name, gallery_id):
     global ignore_list
     global total_images
 
-    gallery_html = f'<h2>{header}</h2><div id="{gallery_id}">\n'
+    gallery_html = f'<h2 id="{folder_name}">{header}</h2><div id="{gallery_id}">\n'
     
     # Get a sorted list of files
     files = natsorted([filename for filename in os.listdir(folder_name) \
@@ -105,18 +105,15 @@ def generate_html():
     </p>
     <p>
     The <a href="javascript:void(0)" data-pswp-open="144">earliest
-    portrait</a> on this page dates to 2015. I didn't get sketchbooks and make
+    portrait</a> on this page dates to 2015. I didn't <a
+    href="https://a.co/d/inhjv9j" target="_blank">get sketchbooks</a> and make
     it a project until Spring of 2017. The years 2017 and 2018 were very
     active; meanwhile, I collected only two portraits in 2020 and zero in
     2021. The portraits are listed in roughly chronological order, except for
     a set of drawings at the end, which were not scanned from my portrait
-    sketchbooks — they're a miscellaneous collection of drawings that I
-    received from friends and strangers over the years (all unsolicited, iirc,
-    <a href="javascript:void(0)" data-pswp-open="140">except for one</a>).
-    </p>
-    <p>
-    I always welcome new portraits. If you want to draw me, I ask that you
-    first try to find me in person and draw in my portrait book.
+    sketchbooks — they're a <a href="#misc">miscellaneous collection</a> of
+    drawings that I received from friends and strangers over the years (all
+    unsolicited, iirc).
     </p>
     <p>
     I include almost all portraits on this page. I have omitted only two
@@ -127,6 +124,10 @@ def generate_html():
     <p>
     Some people have drawn multiple portraits. For example, the very first two
     portraits in this gallery were drawn by the same person.
+    </p>
+    <p>
+    I always welcome new portraits. If you want to draw me, please find me
+    in person and draw in my portrait book!
     </p>
     <!--
     <p>
