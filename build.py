@@ -90,7 +90,7 @@ def generate_html():
             <script src="./js/smartquotes.min.js"></script>
         </head>\n"""
     bodyopen = "<body>\n"
-    menu = "<div id='menu'><a id='garlol' href='/'><span>&#42600;</span> gar.lol</a></div>\n"
+    menu = "<div id='menu'><a id='garlol' href='/'>:: gar.lol</a></div>\n"
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
