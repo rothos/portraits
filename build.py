@@ -77,6 +77,15 @@ def generate_html():
     misc_gallery = generate_gallery("Miscellaneous portraits", "misc", "misc_gallery")
 
     head = f"""<!DOCTYPE html><html><head>
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-VSL74PME4G"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){{dataLayer.push(arguments);}}
+              gtag('js', new Date());
+
+              gtag('config', 'G-VSL74PME4G');
+            </script>
             <title>Portraits</title>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width,initial-scale=1"/>
