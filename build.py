@@ -3,7 +3,7 @@ Build the static site which deploys to gar.lol/portraits via Github Pages.
 """
 
 import os
-import minify_html
+# import minify_html
 from natsort import natsorted               # to sort filenames
 from PIL import Image                       # to get image dimensions
 from datetime import datetime               # to print the date in human-readable format
@@ -345,7 +345,7 @@ def main():
     html_content = generate_html()
     css_content = generate_css()
 
-    minified = minify_html.minify(html_content, minify_js=True)
+    # minified = minify_html.minify(html_content, minify_js=True)
 
     with open("index.html", "w") as html_file:
         html_file.write(html_content)
