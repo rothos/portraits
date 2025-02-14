@@ -40,21 +40,22 @@ for book_folder in book1@800dpi book2@800dpi book3@800dpi; do
         # Define the output filename
         output_filename="${output_folder}/book${book_number}_${image_number}.png"
 
-        # # Check if the output file already exists, and skip processing if it does
-        # if [ -e "$output_filename" ]; then
-        #     echo "${image_number}: ${image_path} -> ${output_filename} already exists. Skipping."
-        #     continue
-        # fi
+        # Check if the output file already exists, and skip processing if it does
+        if [ -e "$output_filename" ]; then
+            echo "${image_number}: ${image_path} -> ${output_filename} already exists. Skipping."
+            ((image_number++))
+            continue
+        fi
 
         # Get the HCL mean value for the image
         hcl_mean=$(get_hcl_mean "$image_path")
 
-        # Choose the appropriate convert command based on HCL mean value
+        # Choose the appropriate magick command based on HCL mean value
         if [ "$(echo "$hcl_mean < 0.08" | bc -l)" -eq 1 ]; then
-            convert -quiet "$image_path" -alpha off -resize '2000x2000>' -colors 64 -auto-orient "$output_filename"
+            magick -quiet "$image_path" -alpha off -resize '2000x2000>' -colors 64 -auto-orient "$output_filename"
             decision="using 64 colors"
         else
-            convert -quiet "$image_path" -alpha off -resize '2000x2000>' -colors 256 -auto-orient "$output_filename"
+            magick -quiet "$image_path" -alpha off -resize '2000x2000>' -colors 256 -auto-orient "$output_filename"
             decision="using 256 colors"
         fi
 

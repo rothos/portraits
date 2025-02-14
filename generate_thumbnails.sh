@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# Input folder containing images
-input_folder=$1
+# Input folder containing images (default to "books")
+input_folder=${1:-"books"}
+
+# Flag to skip existing thumbnails
+skip_existing=true
 
 log_file="generate_thumbnails.log"
 
@@ -24,9 +27,16 @@ IFS=$'\n'
 for image_path in $(ls "$input_folder"/* | grep -v 't.png' | sort -V); do
     # Check if the file is a regular file
     if [ -f "$image_path" ]; then
-        # Create a thumbnail with 200px height
         thumbnail_path="${image_path%.*}t.png"
-        convert -quiet "$image_path" -resize x300 -sharpen 0x1 "$thumbnail_path"
+        
+        # Skip if thumbnail exists and skip_existing is true
+        if [ "$skip_existing" = true ] && [ -f "$thumbnail_path" ]; then
+            echo "Skipping existing thumbnail: $thumbnail_path"
+            continue
+        fi
+
+        # Create a thumbnail with 300px height
+        magick -quiet "$image_path" -resize x300 -sharpen 0x1 "$thumbnail_path"
         echo "Thumbnail created: $thumbnail_path"
     fi
 done
