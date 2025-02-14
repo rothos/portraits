@@ -130,7 +130,7 @@ def generate_html():
     {total_images} portraits collected on this page.
     </p>
     <p>
-    The <a href="javascript:void(0)" data-pswp-open="144">earliest
+    The <a href="javascript:void(0)" data-pswp-name="m9">earliest
     portrait</a> on this page dates to 2015. I didn't <a
     href="https://a.co/d/inhjv9j" target="_blank">get sketchbooks</a> and make
     it a project until Spring of 2017. The years 2017 and 2018 were very
@@ -225,13 +225,26 @@ def generate_html():
             }
         }
 
-        var elementsWithAttribute = document.querySelectorAll('[data-pswp-open]');
+        var elementsWithAttribute = document.querySelectorAll('[data-pswp-open], [data-pswp-name]');
         elementsWithAttribute.forEach(function(element) {
             element.addEventListener('click', function() {
-                var id = element.getAttribute('data-pswp-open');
-                lightbox.loadAndOpen(id-1, {
-                    gallery: document.querySelector('#gallery')
-                });
+                if (element.hasAttribute('data-pswp-open')) {
+                    var id = element.getAttribute('data-pswp-open');
+                    lightbox.loadAndOpen(id-1, {
+                        gallery: document.querySelector('#gallery')
+                    });
+                } else if (element.hasAttribute('data-pswp-name')) {
+                    var name = element.getAttribute('data-pswp-name');
+                    var allLinks = document.querySelectorAll('#gallery a');
+                    var targetIndex = Array.from(allLinks).findIndex(
+                        link => link.getAttribute('name') === name
+                    );
+                    if (targetIndex !== -1) {
+                        lightbox.loadAndOpen(targetIndex, {
+                            gallery: document.querySelector('#gallery')
+                        });
+                    }
+                }
             });
         });
 

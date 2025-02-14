@@ -97,3 +97,14 @@ into one doesn't seem to work, so I had to pipe them:
 
     convert "book1@800dpi/p 0.png" -alpha off -resize '20x20>' png:- | \
         convert - -colorspace HCL -channel g -separate +channel -format "%[fx:mean]\n" info:
+
+
+
+SCRATCH NOTES OF OTHER COMMANDS I HAVE USED
+-------------------------------------------
+
+find . -maxdepth 1 -type f -name "*.png" -exec magick {} -quality 85 {}.jpeg \;
+for f in *.png.jpeg; do mv "$f" "${f%.png.jpeg}.jpeg"; done
+
+find . -maxdepth 1 -type f -name "*.jpeg" -exec magick {} -quality 85 {}.png \;
+for f in *.jpeg.png; do mv "$f" "${f%.jpeg.png}.png"; done
