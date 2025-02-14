@@ -18,7 +18,9 @@ formatted_time = current_local_time.strftime("%Y-%m-%d %H:%M:%S %Z") \
 # For ensuring files aren't cached.
 epoch = int(time.time())
 
-# Total image count
+# Total image count for each gallery
+book_count = 0
+misc_count = 0
 total_images = 0
 
 # List of filenames to ignore
@@ -30,9 +32,11 @@ def get_image_dimensions(image_path):
         return img.size
 
 # Function to generate image gallery HTML code
-def generate_gallery(header, folder_name, gallery_id):
+def generate_gallery(header, folder_name, gallery_id, name_prefix):
     global ignore_list
     global total_images
+    global book_count
+    global misc_count
 
     gallery_html = f'<h2 id="{folder_name}">{header}</h2><div id="{gallery_id}">\n'
     
@@ -44,6 +48,14 @@ def generate_gallery(header, folder_name, gallery_id):
 
     for filename in files:
         total_images += 1  # Increment the total_images count
+        
+        # Increment the appropriate counter based on prefix
+        if name_prefix == "p":
+            book_count += 1
+            count = book_count
+        else:
+            misc_count += 1
+            count = misc_count
 
         image_path = os.path.join(folder_name, filename)
         thumbnail_path = os.path.join(folder_name, filename[:-4] + "t.png")
@@ -52,17 +64,22 @@ def generate_gallery(header, folder_name, gallery_id):
         width, height = get_image_dimensions(image_path)
         twidth, theight = get_image_dimensions(thumbnail_path)
 
-        gallery_html += f'    <a href="{image_path}" \
-                                        name="p{total_images}" \
+        next_image = f'    <a href="{image_path}" \
+                                        name="{name_prefix}{count}" \
                                         data-pswp-width="{width}" \
                                         data-pswp-height="{height}" \
                                         target="_blank">\n'
-        gallery_html += f'        <img alt="portrait #{total_images}, a portrait drawing of me" \
+        next_image += f'        <img alt="portrait #{total_images}, a portrait drawing of me" \
                                         src="{thumbnail_path}" \
                                         width="{twidth}" \
                                         height="{theight}" \
                                         />\n'
-        gallery_html += '    </a>\n'
+        next_image += '    </a>\n'
+
+        # Remove excess whitespace while maintaining newlines
+        next_image = '\n'.join([' '.join(line.split()) for line in next_image.split('\n')])
+
+        gallery_html += next_image
 
     gallery_html += '</div>\n'
     return gallery_html
@@ -73,8 +90,8 @@ def generate_html():
     global ignore_list
     n_ignored = len(ignore_list)
 
-    books_gallery = generate_gallery("Sketchbook portraits", "books", "books_gallery")
-    misc_gallery = generate_gallery("Miscellaneous portraits", "misc", "misc_gallery")
+    books_gallery = generate_gallery("Sketchbook portraits", "books", "books_gallery", "p")
+    misc_gallery = generate_gallery("Miscellaneous portraits", "misc", "misc_gallery", "m")
 
     head = f"""<!DOCTYPE html><html><head>
             <!-- Google tag (gtag.js) -->
