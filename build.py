@@ -114,9 +114,52 @@ def generate_html():
             <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap" \
                 rel="stylesheet">
             <script src="./js/smartquotes.min.js"></script>
+            <script>
+                // Theme handling
+                function getThemePreference() {{
+                    return localStorage.getItem('theme') || 'auto';
+                }}
+
+                function setTheme(theme) {{
+                    localStorage.setItem('theme', theme);
+                    applyTheme(theme);
+                }}
+
+                function applyTheme(theme) {{
+                    const isDark = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                    updateThemeToggle(theme);
+                }}
+
+                function updateThemeToggle(theme) {{
+                    const toggle = document.getElementById('theme-toggle');
+                    if (toggle) {{
+                        toggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                        toggle.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+                    }}
+                }}
+
+                // Initialize theme
+                document.addEventListener('DOMContentLoaded', () => {{
+                    const theme = getThemePreference();
+                    applyTheme(theme);
+                    
+                    // Listen for system theme changes
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {{
+                        if (getThemePreference() === 'auto') {{
+                            applyTheme('auto');
+                        }}
+                    }});
+                }});
+            </script>
         </head>\n"""
     bodyopen = "<body>\n"
-    menu = "<div id='menu'><a id='garlol' href='/'>// gar.lol</a></div>\n"
+    menu = """<div id='menu'>
+        <a id='garlol' href='/'>// gar.lol</a>
+        <button id="theme-toggle" onclick="setTheme(getThemePreference() === 'dark' ? 'light' : 'dark')" 
+            aria-label="Toggle dark mode">🌙</button>
+    </div>\n"""
     header = '<h1>Portraits</h1>\n'
     top_text = f"""<p>
     As an ongoing art project, I sometimes ask people if they'd like to to
@@ -277,11 +320,37 @@ def generate_css():
 styles.css
 */
 
+:root {
+    /* Light theme colors */
+    --bg-color: #fff;
+    --text-color: #222;
+    --link-bg: #edf6fb;
+    --link-color: #259;
+    --menu-color: #369;
+    --menu-shadow: #ccc;
+    --img-bg: #ddd;
+    
+    /* Theme transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --link-bg: #2a3f4a;
+    --link-color: #7cb4d9;
+    --menu-color: #7cb4d9;
+    --menu-shadow: #000;
+    --img-bg: #333;
+}
+
 body {
     font-family: 'Assistant', sans-serif;
     padding: 40px;
     margin: 0;
-    color: #222;
+    color: var(--text-color);
+    background-color: var(--bg-color);
 }
 
 p {
@@ -289,9 +358,9 @@ p {
 }
 
 p a {
-    color: #259;
+    color: var(--link-color);
     text-decoration: none;
-    background-color: #edf6fb;
+    background-color: var(--link-bg);
 }
 
 h1, h2 {
@@ -308,13 +377,32 @@ p {
     margin-bottom: 15px;
 }
 
-#menu {}
+#menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+#theme-toggle:hover {
+    background-color: var(--link-bg);
+}
 
 #garlol {
     background-color: unset;
     text-decoration: none;
-    color: #369;
-    text-shadow: #ccc 1px 0 3px;
+    color: var(--menu-color);
+    text-shadow: var(--menu-shadow) 1px 0 3px;
     font-family: 'Libre Baskerville', serif;
     font-size: 1.6em;
 }
@@ -339,7 +427,7 @@ p {
 }
 
 #books_gallery a img, #misc_gallery a img {
-  background-color: #ddd;
+  background-color: var(--img-bg);
 }
 
 @media only screen and (max-width: 800px) {

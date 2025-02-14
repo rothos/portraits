@@ -12,14 +12,57 @@
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width,initial-scale=1"/>
             <link rel="stylesheet" href="./css/photoswipe.css">
-            <link rel="stylesheet" href="./css/styles.css?1739517978">
+            <link rel="stylesheet" href="./css/styles.css?1739518408">
             <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet'>
             <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400&display=swap"                 rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&display=swap"                 rel="stylesheet">
             <script src="./js/smartquotes.min.js"></script>
+            <script>
+                // Theme handling
+                function getThemePreference() {
+                    return localStorage.getItem('theme') || 'auto';
+                }
+
+                function setTheme(theme) {
+                    localStorage.setItem('theme', theme);
+                    applyTheme(theme);
+                }
+
+                function applyTheme(theme) {
+                    const isDark = theme === 'dark' || 
+                        (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                    updateThemeToggle(theme);
+                }
+
+                function updateThemeToggle(theme) {
+                    const toggle = document.getElementById('theme-toggle');
+                    if (toggle) {
+                        toggle.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                        toggle.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+                    }
+                }
+
+                // Initialize theme
+                document.addEventListener('DOMContentLoaded', () => {
+                    const theme = getThemePreference();
+                    applyTheme(theme);
+                    
+                    // Listen for system theme changes
+                    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                        if (getThemePreference() === 'auto') {
+                            applyTheme('auto');
+                        }
+                    });
+                });
+            </script>
         </head>
 <body>
-<div id='menu'><a id='garlol' href='/'>// gar.lol</a></div>
+<div id='menu'>
+        <a id='garlol' href='/'>// gar.lol</a>
+        <button id="theme-toggle" onclick="setTheme(getThemePreference() === 'dark' ? 'light' : 'dark')" 
+            aria-label="Toggle dark mode">🌙</button>
+    </div>
 <h1>Portraits</h1>
 <p>
     As an ongoing art project, I sometimes ask people if they'd like to to
@@ -663,6 +706,6 @@
         });
     </script>
     <!--
-    Last updated: 2025-02-13 23:26:18 (PST)
+    Last updated: 2025-02-13 23:33:28 (PST)
     -->
 </body></html>
