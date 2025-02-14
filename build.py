@@ -188,13 +188,22 @@ def generate_html():
         if(window.location.hash) {
             // Fragment exists
             var hash = window.location.hash.slice(1);
-            var pattern = /^p(\\d+)$/;
+            var pattern = /^([pm])(\\d+)$/;  // Match either p123 or m123
             var match = hash.match(pattern);
             if (match) {
-                var pN = parseInt(match[1], 10);
-                lightbox.loadAndOpen(pN-1, {
-                    gallery: document.querySelector('#gallery')
-                });
+                var prefix = match[1];
+                var num = parseInt(match[2], 10);
+                
+                // Find the index in the combined gallery
+                var allLinks = document.querySelectorAll('#gallery a');
+                var targetIndex = Array.from(allLinks).findIndex(
+                    link => link.getAttribute('name') === `${prefix}${num}`
+                );
+                if (targetIndex !== -1) {
+                    lightbox.loadAndOpen(targetIndex, {
+                        gallery: document.querySelector('#gallery')
+                    });
+                }
             }
         }
 
@@ -227,10 +236,16 @@ def generate_html():
         });
 
         lightbox.on('change', (e) => {
-            // triggers when slide is switched, and at initialization
-            var newHash = "#p" + (lightbox.pswp.currIndex+1);
+            // Get the current slide's link element
+            var currentSlide = lightbox.pswp.currSlide;
+            if (!currentSlide) return;
+            
+            var currentElement = currentSlide.data.element;
+            var name = currentElement.getAttribute('name');
+            
+            // Update URL with the current image's name (which includes the prefix)
             var curUrlNoHash = window.location.toString().split('#')[0];
-            history.replaceState({}, '', curUrlNoHash + newHash);
+            history.replaceState({}, '', curUrlNoHash + '#' + name);
         });
 
         lightbox.on('close', () => {
