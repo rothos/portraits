@@ -1,3 +1,25 @@
+SCANNING SKETCHES
+-----------------
+
+I scan the sketches on an EPSON V600 photo scanner.
+
+I don't remember all of the settings I used for the first round of scans,
+except that I did them all at 800dpi.
+
+    Resolution: 800dpi
+    Image size: ?
+    Name: p
+    Format: JPEG
+
+The first time I scanned I think I used PNG, but the file sizes are enormous,
+and it's not necessary to have such huge lossless files.
+
+When scanning, I put a few sheets of printer paper inserted into the book
+behind the page I'm scanning, to give it a white background.
+
+
+
+
 PROCESSING PHOTOS: BOOK PORTRAITS AND MISC PORTRAITS
 ---–-------------–------------------–-------------–-
 
